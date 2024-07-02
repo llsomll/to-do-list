@@ -11,8 +11,17 @@ let tabs = document.querySelectorAll(".task-tabs div");
 let taskList = [];
 let mode = "all";
 let filterList = [];
+let underLine = document.getElementById("under-line");
+let taskTabs = document.querySelectorAll(".task-tabs div");
+
+taskTabs.forEach(menu=>menu.addEventListener("click", (e)=>underlineIndicator(e)));
 
 addButton.addEventListener("click", addTask);
+taskInput.addEventListener("keydown", function (event) {
+    if (event.keyCode === 13) {
+        addTask();
+    }
+});
 
 for (let i = 1; i < tabs.length; i++) {
     tabs[i].addEventListener("click", function (event) {
@@ -21,8 +30,14 @@ for (let i = 1; i < tabs.length; i++) {
 }
 
 function addTask() {
+    let taskValue = taskInput.value;
+
+    if(taskValue === "") {
+        return alert("Please enter a task");
+    }
+
     let task = {
-        id: randomIDGenerate(), taskContent: taskInput.value, isComplete: false
+        id: randomIDGenerate(), taskContent: taskValue, isComplete: false
     }
     taskList.push(task);
     console.log(taskList);
@@ -35,9 +50,9 @@ function render() {
     // ongoing, done - filterList
 
     let list = [];
-    if(mode === "all") {
+    if (mode === "all") {
         list = taskList;
-    } else if (mode === "ongoing" || mode === "done" ) {
+    } else if (mode === "ongoing" || mode === "done") {
         list = filterList;
     }
 
@@ -94,23 +109,23 @@ function deleteTask(id) {
 function filter(event) {
     console.log("filters", event.target.id);
     mode = event.target.id;
-    filterList =[];
+    filterList = [];
 
     if (mode === "all") {
         //everything
         render();
     } else if (mode === "ongoing") {
         //task.isComplete == false
-        for(let i=0; i<taskList.length; i++){
-            if(taskList[i].isComplete == false){
+        for (let i = 0; i < taskList.length; i++) {
+            if (taskList[i].isComplete == false) {
                 filterList.push(taskList[i]);
             }
         }
         render();
     } else if (mode === "done") {
         //task.isComplete == true
-        for(let i=0; i<taskList.length; i++){
-            if(taskList[i].isComplete == true){
+        for (let i = 0; i < taskList.length; i++) {
+            if (taskList[i].isComplete == true) {
                 filterList.push(taskList[i]);
             }
         }
@@ -119,6 +134,13 @@ function filter(event) {
 }
 
 
-    function randomIDGenerate() {
-        return '_' + Math.random().toString(36).substr(2, 9);
-    }
+function underlineIndicator(e) {
+    underLine.style.left = e.currentTarget.offsetLeft+"px";
+    underLine.style.width = e.currentTarget.offsetWidth+"px";
+    underLine.style.top = e.currentTarget.offsetTop + e.currentTarget.offsetHeight + "px";
+}
+
+
+function randomIDGenerate() {
+    return '_' + Math.random().toString(36).substr(2, 9);
+}

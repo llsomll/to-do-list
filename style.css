@@ -1,10 +1,14 @@
 @import url("https://fonts.googleapis.com/css2?family=Kalnia:wght@600&display=swap");
+@import url('https://fonts.googleapis.com/css2?family=Noto+Serif+JP:wght@200..900&family=Playwrite+AU+TAS:wght@100..400&display=swap');
 
 body {
     margin: 0px;
     padding: 0px;
     min-height: 100vh;
-    background-color: #a7c1a8;
+    /* background-color: #a7c1a8; */
+    background-image: url(images/background.png);
+    background-repeat: no-repeat;
+    background-size: cover;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -23,21 +27,29 @@ body {
     background-image: url("images/leaf.png");
     background-position: right bottom;
     background-repeat: no-repeat;
-    padding: 1em 2em;
-}
-
-
-.title {
-    display: flex;
-    justify-content: center;
+    padding: 0 2em;
+    box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+    position: relative;
 }
 
 h1 {
     font-family: "Kalnia", sans-serif;
     font-size: 36px;
     text-align: center;
-    margin: 15px;
+    margin: 15px 0 0 0;
     text-decoration: underline dotted #f8966f;
+    letter-spacing: 1px;
+}
+
+.caption {
+    text-align: center;
+    margin: 0;
+    font-family: "Playwrite AU TAS", cursive;
+    font-size: 13px;
+}
+
+.copyright {
+    text-align: center;
 }
 
 /* .task-area {
@@ -46,9 +58,9 @@ h1 {
 
 .task-tabs {
     display: flex;
-    border-bottom: 2px dotted lightgrey;
+    border-bottom: 4px dotted lightgrey;
     position: relative;
-    font-family: "Kalnia", sans-serif;
+    font-family: "Playwrite AU TAS", cursive;
 }
 
 .task-tabs div {
@@ -60,10 +72,11 @@ h1 {
     height: 4px;
     background-color: #f8966f;
     position: absolute;
-    width: 60px;
+    width: 55.45px;
     left: 0px;
-    top: 52px;
+    top: 56px;
     padding: 0px;
+    transition: 0.5s;
 }
 
 .task {
@@ -73,7 +86,7 @@ h1 {
     border: 3px solid rgb(231, 231, 231);
     margin: 1em 0;
     border-radius: 999px;
-    background-color: rgba(255,255,255,.8);
+    background-color: rgba(255,255,255,.7);
 }
 
 .task-done {
