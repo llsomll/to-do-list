@@ -37,7 +37,7 @@ function addTask() {
     }
 
     let task = {
-        id: randomIDGenerate(), taskContent: taskValue, isComplete: false
+        id: randomIDGenerate(), taskContent: taskValue, isComplete: false, isImportant: false
     }
     taskList.push(task);
     taskInput.value = "";
@@ -54,15 +54,22 @@ function render() {
         list = taskList;
     } else if (mode === "ongoing" || mode === "done") {
         list = filterList;
+    } else if (mode === "priority") {
+        list = filterList;
     }
 
     let resultHTML = "";
     for (let i = 0; i < list.length; i++) {
+        
+        let task = list[i];
+        let importantIcon = task.isImportant ? 'fa-solid' : 'fa-regular';
+
         if (list[i].isComplete) {
             resultHTML += `<div class="task" style="background-color: rgb(231, 231, 231);">
                     <div class="task-done">${list[i].taskContent}</div>
                     <div class="buttons">
                         <button onclick="toggleComplete('${list[i].id}')"><i class="fa-solid fa-arrow-rotate-left fa-lg" style="color: #2085be;"></i></button>
+                        <button onclick="importantTask('${list[i].id}')"><i class="${importantIcon} fa-star fa-lg" style="color: #fb655e;"></i></button>
                         <button onclick="editTask('${list[i].id}')"><i class="fa-solid fa-pen-to-square fa-lg" style="color: #299e5e;"></i></button>
                         <button onclick="deleteTask('${list[i].id}')"><i class="fa-solid fa-trash fa-lg" style="color: #ffc800;"></i></button>
                     </div>
@@ -73,6 +80,7 @@ function render() {
             <div>${list[i].taskContent}</div>
             <div class="buttons">
                 <button onclick="toggleComplete('${list[i].id}')"><i class="fa-solid fa-check fa-xl" style="color: #fc7e1b;"></i></button>
+                <button onclick="importantTask('${list[i].id}')"><i class="${importantIcon} fa-star fa-lg" style="color: #fb655e;"></i></button>
                 <button onclick="editTask('${list[i].id}')"><i class="fa-solid fa-pen-to-square fa-lg" style="color: #299e5e;"></i></button>
                 <button onclick="deleteTask('${list[i].id}')"><i class="fa-solid fa-trash fa-lg" style="color: #ffc800;"></i></button>
             </div>
@@ -80,15 +88,26 @@ function render() {
         }
     }
 
+
     document.getElementById("task-board").innerHTML = resultHTML;
 
 }
 
 function toggleComplete(id) {
-    console.log("id: ", id);
     for (let i = 0; i < taskList.length; i++) {
         if (taskList[i].id == id) {
             taskList[i].isComplete = !taskList[i].isComplete;
+            break;
+        }
+    }
+    filter();
+}
+
+
+function importantTask(id){
+    for (let i = 0; i < taskList.length; i++) {
+        if (taskList[i].id == id) {
+            taskList[i].isImportant = !taskList[i].isImportant;
             break;
         }
     }
@@ -127,31 +146,22 @@ function filter(event) {
         underLine.style.width = event.target.offsetWidth + "px";
         underLine.style.left = event.target.offsetLeft + "px";
         underLine.style.top =
-            event.target.offsetTop + (event.target.offsetHeight) + "px";
+            event.target.offsetTop + event.target.offsetHeight + "px";
     }
 
     filterList = [];
 
     if (mode === "all") {
-        //everything
-        render();
+        filterList = taskList; // Show all tasks
     } else if (mode === "ongoing") {
-        //task.isComplete == false
-        for (let i = 0; i < taskList.length; i++) {
-            if (taskList[i].isComplete == false) {
-                filterList.push(taskList[i]);
-            }
-        }
-        render();
+        filterList = taskList.filter(task => !task.isComplete); // Filter ongoing tasks
     } else if (mode === "done") {
-        //task.isComplete == true
-        for (let i = 0; i < taskList.length; i++) {
-            if (taskList[i].isComplete == true) {
-                filterList.push(taskList[i]);
-            }
-        }
-        render();
+        filterList = taskList.filter(task => task.isComplete); // Filter completed tasks
+    } else if (mode === "priority") {
+        filterList = taskList.filter(task => task.isImportant); // Filter tasks marked as important
     }
+
+    render(); 
 }
 
 
