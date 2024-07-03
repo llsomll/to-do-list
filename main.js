@@ -63,6 +63,7 @@ function render() {
                     <div class="task-done">${list[i].taskContent}</div>
                     <div class="buttons">
                         <button onclick="toggleComplete('${list[i].id}')"><i class="fa-solid fa-arrow-rotate-left fa-lg" style="color: #2085be;"></i></button>
+                        <button onclick="editTask('${list[i].id}')"><i class="fa-solid fa-pen-to-square fa-lg" style="color: #299e5e;"></i></button>
                         <button onclick="deleteTask('${list[i].id}')"><i class="fa-solid fa-trash fa-lg" style="color: #ffc800;"></i></button>
                     </div>
                 </div>`;
@@ -72,6 +73,7 @@ function render() {
             <div>${list[i].taskContent}</div>
             <div class="buttons">
                 <button onclick="toggleComplete('${list[i].id}')"><i class="fa-solid fa-check fa-xl" style="color: #fc7e1b;"></i></button>
+                <button onclick="editTask('${list[i].id}')"><i class="fa-solid fa-pen-to-square fa-lg" style="color: #299e5e;"></i></button>
                 <button onclick="deleteTask('${list[i].id}')"><i class="fa-solid fa-trash fa-lg" style="color: #ffc800;"></i></button>
             </div>
         </div>`;
@@ -91,6 +93,20 @@ function toggleComplete(id) {
         }
     }
     filter();
+}
+
+
+function editTask(id) {
+    let newContent = prompt("Please edit your task");
+    if (newContent) {
+        for (let i = 0; i < taskList.length; i++) {
+            if (taskList[i].id === id) {
+                taskList[i].taskContent = newContent;
+                break;
+            }
+        }
+        render();
+    }
 }
 
 
