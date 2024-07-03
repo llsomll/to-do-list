@@ -12,9 +12,8 @@ let taskList = [];
 let mode = "all";
 let filterList = [];
 let underLine = document.getElementById("under-line");
-let taskTabs = document.querySelectorAll(".task-tabs div");
 
-taskTabs.forEach(menu=>menu.addEventListener("click", (e)=>underlineIndicator(e)));
+// taskTabs.forEach(menu=>menu.addEventListener("click", (e)=>underlineIndicator(e)));
 
 addButton.addEventListener("click", addTask);
 taskInput.addEventListener("keydown", function (event) {
@@ -32,15 +31,16 @@ for (let i = 1; i < tabs.length; i++) {
 function addTask() {
     let taskValue = taskInput.value;
 
-    if(taskValue === "") {
+    if (taskValue === "") {
         return alert("Please enter a task");
+        return;
     }
 
     let task = {
         id: randomIDGenerate(), taskContent: taskValue, isComplete: false
     }
     taskList.push(task);
-    console.log(taskList);
+    taskInput.value = "";
     render();
 }
 
@@ -90,7 +90,7 @@ function toggleComplete(id) {
             break;
         }
     }
-    render();
+    filter();
 }
 
 
@@ -99,16 +99,21 @@ function deleteTask(id) {
     for (let i = 0; i < taskList.length; i++) {
         if (taskList[i].id == id) {
             taskList.splice(i, 1);
-            break;
         }
     }
-    render();
+    filter();
 }
 
 
 function filter(event) {
-    console.log("filters", event.target.id);
-    mode = event.target.id;
+    if (event) {
+        mode = event.target.id;
+        underLine.style.width = event.target.offsetWidth + "px";
+        underLine.style.left = event.target.offsetLeft + "px";
+        underLine.style.top =
+            event.target.offsetTop + (event.target.offsetHeight) + "px";
+    }
+
     filterList = [];
 
     if (mode === "all") {
@@ -134,11 +139,11 @@ function filter(event) {
 }
 
 
-function underlineIndicator(e) {
-    underLine.style.left = e.currentTarget.offsetLeft+"px";
-    underLine.style.width = e.currentTarget.offsetWidth+"px";
-    underLine.style.top = e.currentTarget.offsetTop + e.currentTarget.offsetHeight + "px";
-}
+// function underlineIndicator(e) {
+//     underLine.style.left = e.currentTarget.offsetLeft+"px";
+//     underLine.style.width = e.currentTarget.offsetWidth+"px";
+//     underLine.style.top = e.currentTarget.offsetTop + e.currentTarget.offsetHeight + "px";
+// }
 
 
 function randomIDGenerate() {
