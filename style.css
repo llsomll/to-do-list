@@ -5,8 +5,8 @@ body {
     margin: 0px;
     padding: 0px;
     min-height: 100vh;
-    /* background-color: #a7c1a8; */
-    background-image: url(images/background.png);
+    /* background-color: #fbd963; */
+    background-image: url(images/background2.png);
     background-repeat: no-repeat;
     background-size: cover;
     display: flex;
@@ -23,8 +23,8 @@ body {
     background-color: #f7f3e7;
     padding: 0;
     max-width: 800px;
-    border-top: 20px solid #849acb;
-    border-bottom: 20px solid #849acb;
+    border-top: 20px solid #2085be;
+    border-bottom: 20px solid #2085be;
     background-image: url("images/flower.png");
     background-position: center bottom;
     background-repeat: no-repeat;
@@ -124,6 +124,6 @@ footer {
 
 @media only screen and (max-width: 600px) {
     .box {
-        background-size: 50%;
+        background-size: 60%;
     }
 }

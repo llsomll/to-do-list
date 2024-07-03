@@ -62,8 +62,8 @@ function render() {
             resultHTML += `<div class="task" style="background-color: rgb(231, 231, 231);">
                     <div class="task-done">${list[i].taskContent}</div>
                     <div class="buttons">
-                        <button onclick="toggleComplete('${list[i].id}')"><i class="fa-solid fa-arrow-rotate-left fa-lg" style="color: #a2bfad;"></i></button>
-                        <button onclick="deleteTask('${list[i].id}')"><i class="fa-solid fa-trash fa-lg" style="color: #849acb;"></i></button>
+                        <button onclick="toggleComplete('${list[i].id}')"><i class="fa-solid fa-arrow-rotate-left fa-lg" style="color: #2085be;"></i></button>
+                        <button onclick="deleteTask('${list[i].id}')"><i class="fa-solid fa-trash fa-lg" style="color: #167f46;"></i></button>
                     </div>
                 </div>`;
 
@@ -71,8 +71,8 @@ function render() {
             resultHTML += `<div class="task">
             <div>${list[i].taskContent}</div>
             <div class="buttons">
-                <button onclick="toggleComplete('${list[i].id}')"><i class="fa-solid fa-check fa-xl" style="color: #f8966f;"></i></button>
-                <button onclick="deleteTask('${list[i].id}')"><i class="fa-solid fa-trash fa-lg" style="color: #849acb;"></i></button>
+                <button onclick="toggleComplete('${list[i].id}')"><i class="fa-solid fa-check fa-xl" style="color: #fc7e1b;"></i></button>
+                <button onclick="deleteTask('${list[i].id}')"><i class="fa-solid fa-trash fa-lg" style="color: #167f46;"></i></button>
             </div>
         </div>`;
         }
