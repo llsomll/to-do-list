@@ -119,3 +119,11 @@ footer {
     color: white;
     font-size: 0.8em;
 }
+
+
+
+@media only screen and (max-width: 600px) {
+    .box {
+        background-size: 50%;
+    }
+}
