@@ -132,8 +132,4 @@ footer {
     .box {
         background-size: 60%;
     }
-    .task-tabs {
-        display: flex;
-        justify-content: center;
-    }
 }
