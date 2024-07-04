@@ -3,6 +3,7 @@ This web application helps users manage their tasks efficiently. Users can add, 
 
 ## Features
 * Add Task: Enter a task and click the "+" button or press Enter to add it to your list.
+* Edit Task: Click the edit icon to edit the task that was previously added.
 * Delete Task: Click the trash icon to remove a task from the list.
 * Mark Task as Complete: Click the check icon to mark a task as complete.
 * Mark Task as Incomplete: Click the rotate arrow icon to mark a task as incomplete.
